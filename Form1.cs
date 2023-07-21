@@ -4,6 +4,7 @@ namespace PassManager
 {
     public partial class Form1 : Form
     {
+        public bool currentlyChanging = false;
         public List<PasswordItem> PasswordList = new List<PasswordItem>();
 
         bool EditCheckBoxChecked = true;
@@ -14,32 +15,27 @@ namespace PassManager
 
         private void listBoxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxItems.SelectedIndex == -1)
+            if (listBoxItems.SelectedIndex == -1 && !currentlyChanging)
             {
-                Debug.WriteLine(listBoxItems.SelectedIndex);
-                if (buttonDelete.Enabled)
-                {
-                    buttonDelete.Enabled = false;
-                    textBoxWebsite.Enabled = false;
-                    textBoxWebsite.Text = "";
-                    textBoxUsername.Enabled = false;
-                    textBoxUsername.Text = "";
-                    textBoxPassword.Enabled = false;
-                    textBoxPassword.Text = "";
-                }
-                return;
+                // When nothing is selected in the ListBox
+                buttonDelete.Enabled = false;
+                textBoxWebsite.Enabled = false;
+                textBoxUsername.Enabled = false;
+                textBoxPassword.Enabled = false;
+                textBoxWebsite.Text = "";
+                textBoxUsername.Text = "";
+                textBoxPassword.Text = "";
+                Debug.WriteLine("listBox was -1");
             }
-            else
+            else if(listBoxItems.SelectedIndex != -1)
             {
-                if (!buttonDelete.Enabled)
-                {
-                    textBoxWebsite.Enabled = true;
-                    textBoxUsername.Enabled = true;
-                    textBoxPassword.Enabled = true;
-                    buttonDelete.Enabled = true;
-                }
+                // When an item is selected in the ListBox
+                buttonDelete.Enabled = true;
+                textBoxWebsite.Enabled = true;
+                textBoxUsername.Enabled = true;
+                textBoxPassword.Enabled = true;
                 LoadTextBoxs(listBoxItems.SelectedIndex);
-                
+                Debug.WriteLine("listBox changed and wasn't -1, it was" + listBoxItems.SelectedIndex);
             }
         }
         private void LoadTextBoxs(int selectedItem)
@@ -115,10 +111,15 @@ namespace PassManager
             ////{
             ////    object itembefore = listBoxItems.SelectedItem;
             //Update 'database'
-            PasswordList[listBoxItems.SelectedIndex].Website = textBoxWebsite.Text;
-            //Update title of selected item when it's name is modified
-            listBoxItems.Items[listBoxItems.SelectedIndex] = PasswordList[listBoxItems.SelectedIndex].Website;
-            
+            if (listBoxItems.SelectedIndex != -1)
+            {
+                PasswordList[listBoxItems.SelectedIndex].Website = textBoxWebsite.Text;
+                //Update title of selected item when it's name is modified
+                currentlyChanging = true;
+                listBoxItems.Items[listBoxItems.SelectedIndex] = PasswordList[listBoxItems.SelectedIndex].Website;
+                currentlyChanging = false;
+            }
+
             ////    listBoxItems.SelectedItem = itembefore;
             ////}
         }

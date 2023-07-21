@@ -109,6 +109,7 @@
             // textBoxUsername
             // 
             textBoxUsername.BackColor = Color.FromArgb(30, 30, 30);
+            textBoxUsername.Enabled = false;
             textBoxUsername.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxUsername.ForeColor = Color.White;
             textBoxUsername.Location = new Point(334, 59);
@@ -130,6 +131,7 @@
             // textBoxWebsite
             // 
             textBoxWebsite.BackColor = Color.FromArgb(30, 30, 30);
+            textBoxWebsite.Enabled = false;
             textBoxWebsite.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxWebsite.ForeColor = Color.White;
             textBoxWebsite.Location = new Point(334, 12);
@@ -141,6 +143,7 @@
             // textBoxPassword
             // 
             textBoxPassword.BackColor = Color.FromArgb(30, 30, 30);
+            textBoxPassword.Enabled = false;
             textBoxPassword.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPassword.ForeColor = Color.White;
             textBoxPassword.Location = new Point(334, 107);
@@ -195,6 +198,7 @@
             // buttonDelete
             // 
             buttonDelete.BackColor = Color.FromArgb(30, 30, 30);
+            buttonDelete.Enabled = false;
             buttonDelete.FlatAppearance.BorderColor = Color.White;
             buttonDelete.FlatAppearance.MouseDownBackColor = Color.FromArgb(80, 80, 80);
             buttonDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 60);
