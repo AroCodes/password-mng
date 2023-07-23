@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             listBoxItems = new ListBox();
             buttonSave = new Button();
             buttonLoad = new Button();
@@ -38,6 +39,11 @@
             textBoxPassword = new TextBox();
             labelPassword = new Label();
             groupBoxSaveLoad = new GroupBox();
+            buttonBrowse = new Button();
+            textBox1 = new TextBox();
+            labelKey = new Label();
+            textBoxPath = new TextBox();
+            labelPath = new Label();
             buttonCreateNew = new Button();
             buttonDelete = new Button();
             buttonRefresh = new Button();
@@ -50,12 +56,13 @@
             // listBoxItems
             // 
             listBoxItems.BackColor = Color.FromArgb(30, 30, 30);
+            listBoxItems.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             listBoxItems.ForeColor = Color.White;
             listBoxItems.FormattingEnabled = true;
-            listBoxItems.ItemHeight = 15;
-            listBoxItems.Location = new Point(12, 8);
+            listBoxItems.ItemHeight = 17;
+            listBoxItems.Location = new Point(12, 12);
             listBoxItems.Name = "listBoxItems";
-            listBoxItems.Size = new Size(224, 454);
+            listBoxItems.Size = new Size(224, 446);
             listBoxItems.TabIndex = 4;
             listBoxItems.SelectedIndexChanged += listBoxItems_SelectedIndexChanged;
             // 
@@ -76,6 +83,7 @@
             buttonSave.Text = "Save...";
             buttonSave.TextAlign = ContentAlignment.MiddleRight;
             buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonLoad
             // 
@@ -88,19 +96,20 @@
             buttonLoad.ForeColor = Color.White;
             buttonLoad.Image = Properties.Resources.input_FILL0_wght400_GRAD0_opsz20;
             buttonLoad.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLoad.Location = new Point(381, 44);
+            buttonLoad.Location = new Point(294, 77);
             buttonLoad.Name = "buttonLoad";
             buttonLoad.Size = new Size(81, 27);
             buttonLoad.TabIndex = 6;
             buttonLoad.Text = "Load...";
             buttonLoad.TextAlign = ContentAlignment.MiddleRight;
             buttonLoad.UseVisualStyleBackColor = false;
+            buttonLoad.Click += buttonLoad_Click;
             // 
             // labelUsername
             // 
             labelUsername.AutoSize = true;
             labelUsername.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelUsername.Location = new Point(242, 63);
+            labelUsername.Location = new Point(242, 59);
             labelUsername.Name = "labelUsername";
             labelUsername.Size = new Size(74, 19);
             labelUsername.TabIndex = 7;
@@ -112,9 +121,9 @@
             textBoxUsername.Enabled = false;
             textBoxUsername.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxUsername.ForeColor = Color.White;
-            textBoxUsername.Location = new Point(334, 59);
+            textBoxUsername.Location = new Point(322, 52);
             textBoxUsername.Name = "textBoxUsername";
-            textBoxUsername.Size = new Size(376, 30);
+            textBoxUsername.Size = new Size(388, 30);
             textBoxUsername.TabIndex = 8;
             textBoxUsername.TextChanged += textBoxUsername_TextChanged;
             // 
@@ -122,7 +131,7 @@
             // 
             labelWebsite.AutoSize = true;
             labelWebsite.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelWebsite.Location = new Point(242, 16);
+            labelWebsite.Location = new Point(242, 19);
             labelWebsite.Name = "labelWebsite";
             labelWebsite.Size = new Size(60, 19);
             labelWebsite.TabIndex = 9;
@@ -134,9 +143,9 @@
             textBoxWebsite.Enabled = false;
             textBoxWebsite.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxWebsite.ForeColor = Color.White;
-            textBoxWebsite.Location = new Point(334, 12);
+            textBoxWebsite.Location = new Point(322, 12);
             textBoxWebsite.Name = "textBoxWebsite";
-            textBoxWebsite.Size = new Size(376, 30);
+            textBoxWebsite.Size = new Size(388, 30);
             textBoxWebsite.TabIndex = 10;
             textBoxWebsite.TextChanged += textBoxWebsite_TextChanged;
             // 
@@ -146,10 +155,10 @@
             textBoxPassword.Enabled = false;
             textBoxPassword.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPassword.ForeColor = Color.White;
-            textBoxPassword.Location = new Point(334, 107);
+            textBoxPassword.Location = new Point(322, 93);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '●';
-            textBoxPassword.Size = new Size(376, 30);
+            textBoxPassword.Size = new Size(388, 30);
             textBoxPassword.TabIndex = 12;
             textBoxPassword.TextChanged += textBoxPassword_TextChanged;
             // 
@@ -157,7 +166,7 @@
             // 
             labelPassword.AutoSize = true;
             labelPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelPassword.Location = new Point(242, 111);
+            labelPassword.Location = new Point(242, 100);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new Size(70, 19);
             labelPassword.TabIndex = 11;
@@ -165,6 +174,11 @@
             // 
             // groupBoxSaveLoad
             // 
+            groupBoxSaveLoad.Controls.Add(buttonBrowse);
+            groupBoxSaveLoad.Controls.Add(textBox1);
+            groupBoxSaveLoad.Controls.Add(labelKey);
+            groupBoxSaveLoad.Controls.Add(textBoxPath);
+            groupBoxSaveLoad.Controls.Add(labelPath);
             groupBoxSaveLoad.Controls.Add(buttonSave);
             groupBoxSaveLoad.Controls.Add(buttonLoad);
             groupBoxSaveLoad.ForeColor = Color.White;
@@ -174,6 +188,63 @@
             groupBoxSaveLoad.TabIndex = 13;
             groupBoxSaveLoad.TabStop = false;
             groupBoxSaveLoad.Text = "Save/Load file options";
+            // 
+            // buttonBrowse
+            // 
+            buttonBrowse.BackColor = Color.FromArgb(30, 30, 30);
+            buttonBrowse.FlatAppearance.BorderColor = Color.White;
+            buttonBrowse.FlatAppearance.MouseDownBackColor = Color.FromArgb(80, 80, 80);
+            buttonBrowse.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 60);
+            buttonBrowse.FlatStyle = FlatStyle.Flat;
+            buttonBrowse.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonBrowse.ForeColor = Color.White;
+            buttonBrowse.Image = Properties.Resources.folder_open_FILL1_wght400_GRAD0_opsz20;
+            buttonBrowse.Location = new Point(435, 51);
+            buttonBrowse.Name = "buttonBrowse";
+            buttonBrowse.Size = new Size(27, 22);
+            buttonBrowse.TabIndex = 21;
+            buttonBrowse.TextAlign = ContentAlignment.MiddleRight;
+            buttonBrowse.UseVisualStyleBackColor = false;
+            buttonBrowse.Click += buttonBrowse_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(30, 30, 30);
+            textBox1.Enabled = false;
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(48, 22);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(378, 23);
+            textBox1.TabIndex = 25;
+            // 
+            // labelKey
+            // 
+            labelKey.AutoSize = true;
+            labelKey.Enabled = false;
+            labelKey.Location = new Point(8, 25);
+            labelKey.Name = "labelKey";
+            labelKey.Size = new Size(29, 15);
+            labelKey.TabIndex = 24;
+            labelKey.Text = "Key:";
+            // 
+            // textBoxPath
+            // 
+            textBoxPath.BackColor = Color.FromArgb(30, 30, 30);
+            textBoxPath.ForeColor = Color.White;
+            textBoxPath.Location = new Point(48, 51);
+            textBoxPath.Name = "textBoxPath";
+            textBoxPath.ReadOnly = true;
+            textBoxPath.Size = new Size(381, 23);
+            textBoxPath.TabIndex = 23;
+            // 
+            // labelPath
+            // 
+            labelPath.AutoSize = true;
+            labelPath.Location = new Point(8, 54);
+            labelPath.Name = "labelPath";
+            labelPath.Size = new Size(34, 15);
+            labelPath.TabIndex = 22;
+            labelPath.Text = "Path:";
             // 
             // buttonCreateNew
             // 
@@ -186,7 +257,7 @@
             buttonCreateNew.ForeColor = Color.White;
             buttonCreateNew.Image = Properties.Resources.add_FILL0_wght400_GRAD0_opsz20;
             buttonCreateNew.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonCreateNew.Location = new Point(96, 468);
+            buttonCreateNew.Location = new Point(96, 467);
             buttonCreateNew.Name = "buttonCreateNew";
             buttonCreateNew.Size = new Size(61, 27);
             buttonCreateNew.TabIndex = 7;
@@ -207,7 +278,7 @@
             buttonDelete.ForeColor = Color.White;
             buttonDelete.Image = Properties.Resources.delete_FILL0_wght400_GRAD0_opsz20;
             buttonDelete.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonDelete.Location = new Point(161, 468);
+            buttonDelete.Location = new Point(161, 467);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 27);
             buttonDelete.TabIndex = 14;
@@ -226,7 +297,7 @@
             buttonRefresh.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonRefresh.ForeColor = Color.White;
             buttonRefresh.Image = Properties.Resources.refresh_FILL0_wght400_GRAD0_opsz20;
-            buttonRefresh.Location = new Point(65, 468);
+            buttonRefresh.Location = new Point(64, 467);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(27, 27);
             buttonRefresh.TabIndex = 16;
@@ -244,7 +315,7 @@
             buttonSearch.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSearch.ForeColor = Color.White;
             buttonSearch.Image = Properties.Resources.search_FILL0_wght400_GRAD0_opsz20;
-            buttonSearch.Location = new Point(34, 468);
+            buttonSearch.Location = new Point(33, 467);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(27, 27);
             buttonSearch.TabIndex = 19;
@@ -261,7 +332,7 @@
             buttonMore.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonMore.ForeColor = Color.White;
             buttonMore.Image = Properties.Resources.more_vert_FILL0_wght400_GRAD0_opsz20;
-            buttonMore.Location = new Point(12, 468);
+            buttonMore.Location = new Point(12, 467);
             buttonMore.Name = "buttonMore";
             buttonMore.Size = new Size(18, 27);
             buttonMore.TabIndex = 20;
@@ -307,9 +378,11 @@
             Controls.Add(labelUsername);
             Controls.Add(listBoxItems);
             ForeColor = Color.White;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
             groupBoxSaveLoad.ResumeLayout(false);
+            groupBoxSaveLoad.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,5 +404,10 @@
         private Button buttonSearch;
         private Button buttonMore;
         private Button buttonCheckBoxEdit;
+        private TextBox textBoxPath;
+        private Label labelPath;
+        private TextBox textBox1;
+        private Label labelKey;
+        private Button buttonBrowse;
     }
 }
